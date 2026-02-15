@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMC Group | Our Companies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #D4AF37; --secondary: #000000; --dark: #0a0a0a; --dark-grey: #1a1a1a; --text: #ffffff; --text-dim: #cccccc; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; line-height: 1.6; color: var(--text); overflow-x: hidden; background-color: var(--dark); padding-top: 80px; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 20px; color: var(--primary); }
+        p { color: var(--text-dim); }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header & Nav (Same as index) */
+        header { background: rgba(10, 10, 10, 0.95); box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #222; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+        .logo img { height: 50px; }
+        nav ul { display: flex; list-style: none; } nav ul li { margin-left: 30px; }
+        nav ul li a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; text-transform: uppercase; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+        .mobile-menu { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
+        .mobile-nav { position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: var(--dark); z-index: 1001; padding: 80px 20px 20px; transition: right 0.3s ease; }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+        .mobile-nav ul { list-style: none; } .mobile-nav ul li { margin-bottom: 20px; }
+        .mobile-nav ul li a { color: var(--text); text-decoration: none; font-size: 1.1rem; display: block; padding: 10px 0; border-bottom: 1px solid #333; }
+
+        /* Section Styles */
+        section { padding: 80px 0; background: var(--dark); }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.8rem; position: relative; display: inline-block; color: var(--text); }
+        .section-title h2::after { content: ''; position: absolute; width: 80px; height: 4px; background: var(--primary); bottom: -15px; left: 50%; transform: translateX(-50%); }
+
+        /* Catalog Grid */
+        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .business-card { background: var(--dark-grey); overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); transition: all 0.4s ease; display: flex; flex-direction: column; border: 1px solid #333; }
+        .business-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .business-header { display: flex; align-items: center; padding: 20px; background: #151515; border-bottom: 1px solid #333; }
+        .business-logo { width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; color: #000; font-size: 1.5rem; }
+        .business-name { color: var(--text); font-size: 1.2rem; font-weight: 700; }
+        .business-image { height: 180px; overflow: hidden; }
+        .business-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .business-card:hover .business-image img { transform: scale(1.1); opacity: 1; }
+        .business-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .business-info p { color: #aaa; margin-bottom: 20px; flex-grow: 1; }
+        .business-link { display: inline-flex; align-items: center; color: var(--primary); font-weight: 600; text-decoration: none; transition: all 0.3s; }
+        .business-link:hover { color: white; }
+        .business-link i { margin-left: 5px; }
+
+        /* Footer */
+        footer { background: #050505; color: white; padding: 60px 0 20px; border-top: 1px solid #222; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .footer-col h3 { font-size: 1.3rem; margin-bottom: 20px; color: var(--text); position: relative; font-family: 'Montserrat', sans-serif; }
+        .footer-col h3::after { content: ''; position: absolute; width: 50px; height: 2px; background: var(--primary); bottom: -10px; left: 0; }
+        .footer-col p { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
+        .footer-col ul { list-style: none; } .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #888; text-decoration: none; transition: color 0.3s; font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: var(--primary); }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-links a { width: 40px; height: 40px; background: transparent; border: 1px solid #333; display: flex; align-items: center; justify-content: center; color: #888; transition: all 0.3s; }
+        .social-links a:hover { border-color: var(--primary); color: var(--primary); }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid #222; color: #555; font-size: 0.9rem; }
+
+        @media (max-width: 768px) { nav ul { display: none; } .mobile-menu { display: block; } }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://z-cdn-media.chatglm.cn/files/e58581e0-86c2-487a-8410-59c7f20b1894.jpeg?auth_key=1871160847-2cb032af801b4cb0922721d279f0b7fa-0-1dbca3265feda1adb9d79fbadb030412" alt="DMC Group Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="company.html" class="active">Company</a></li>
+                    <li><a href="catlg.html">Catalog</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="staff.html">Staff</a></li>
+                    <li><a href="admin.html">Login</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-close"><i class="fas fa-times"></i></div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="company.html">Company</a></li>
+            <li><a href="catlg.html">Catalog</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="staff.html">Staff</a></li>
+            <li><a href="admin.html">Login</a></li>
+        </ul>
+    </div>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Business Portfolio</h2>
+            </div>
+            <div class="catalog-grid">
+                <!-- NovaX -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-bullhorn"></i></div>
+                        <div class="business-name">NovaX</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="NovaX">
+                    </div>
+                    <div class="business-info">
+                        <p>Sri Lanka's #1 promotion network. Specialized in digital marketing and brand awareness campaigns.</p>
+                        <a href="#" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- RU Stores -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="business-name">RU Online Stores</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="RU Online Stores">
+                    </div>
+                    <div class="business-info">
+                        <p>E-commerce platform specializing in dropshipping solutions across Sri Lanka.</p>
+                        <a href="https://ruonlinestore.vercel.app/" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Vibenest -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-gem"></i></div>
+                        <div class="business-name">Vibenest</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Vibenest">
+                    </div>
+                    <div class="business-info">
+                        <p>Premium e-commerce platform offering curated lifestyle products.</p>
+                        <a href="https://dmkaawya.vercel.app/" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- DMC Motor -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-car"></i></div>
+                        <div class="business-name">DMC Motor Deals</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://sharp-cyan-fdlnxxroms.edgeone.app/images.jpeg" alt="DMC Motor Deals">
+                    </div>
+                    <div class="business-info">
+                        <p>Trusted vehicle sales platform offering new and pre-owned cars.</p>
+                        <a href="https://dmkaawya.vercel.app/" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- DMC Construction -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-building"></i></div>
+                        <div class="business-name">DMC Construction</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="DMC Construction">
+                    </div>
+                    <div class="business-info">
+                        <p>Leading construction company delivering residential and commercial projects.</p>
+                        <a href="https://dmkaawya.vercel.app/" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- DMC Real Estate -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-home"></i></div>
+                        <div class="business-name">DMC Real Estate</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="DMC Real Estate">
+                    </div>
+                    <div class="business-info">
+                        <p>Premium real estate services offering property sales and rentals.</p>
+                        <a href="https://dmkaawya.vercel.app/" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- DMC Web Design -->
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-logo"><i class="fas fa-laptop-code"></i></div>
+                        <div class="business-name">DMC Web Design</div>
+                    </div>
+                    <div class="business-image">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="DMC Web Design">
+                    </div>
+                    <div class="business-info">
+                        <p>Creative web design and development agency.</p>
+                        <a href="https://dmkaawya.vercel.app/" target="_blank" class="business-link">Visit Website <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>DMC Group</h3>
+                    <p>A diversified conglomerate with excellence across diverse industries.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="company.html">Company</a></li>
+                        <li><a href="feedback.html">Projects</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Kalutara, Sri Lanka</li>
+                        <li><i class="fas fa-phone"></i> +94 77 5048455</li>
+                        <li><i class="fas fa-envelope"></i> dmkaawya@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 DMC Group. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('.mobile-menu').addEventListener('click', () => document.getElementById('mobileNav').classList.add('active'));
+        document.querySelector('.mobile-nav-close').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('active'));
+    </script>
+</body>
+</html>
